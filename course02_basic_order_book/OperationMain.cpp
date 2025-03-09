@@ -32,7 +32,6 @@ int OperationMain::loadOrderBook() {
         return -1;
     }
 
-    vector<OrderBookEntry> orders;
     string line;
 
     while (getline(file, line)) {
@@ -71,6 +70,32 @@ int OperationMain::loadOrderBook() {
     // cout << "Price: " << order7.getPrice() << endl;
     // cout << "Amount: " << order7.getAmount() << endl << endl;
 
+
+    // double sumPrice = 0.0;
+    // double minPrice = numeric_limits<double>::max();
+    // double maxPrice = numeric_limits<double>::lowest();
+
+    // for (const auto &entry : orders) {
+    //     double currentPrice = entry.getPrice();
+    //     sumPrice += currentPrice;
+    //     if (currentPrice < minPrice) minPrice = currentPrice;
+    //     if (currentPrice > maxPrice) maxPrice = currentPrice;
+    // }
+
+    // double avgPrice = (orders.empty() ? 0.0 : sumPrice / orders.size());
+
+    // cout << "\nBasic Stats over all entries:\n";
+    // cout << " - Average Price: " << avgPrice << "\n";
+    // cout << " - Minimum Price: " << minPrice << "\n";
+    // cout << " - Maximum Price: " << maxPrice << "\n";
+
+    return 0;
+}
+
+void OperationMain::printMarketStats() {
+    
+    cout << "Order Book size: " << orders.size() << " entries" << endl;
+
     double sumPrice = 0.0;
     double minPrice = numeric_limits<double>::max();
     double maxPrice = numeric_limits<double>::lowest();
@@ -88,23 +113,18 @@ int OperationMain::loadOrderBook() {
     cout << " - Average Price: " << avgPrice << "\n";
     cout << " - Minimum Price: " << minPrice << "\n";
     cout << " - Maximum Price: " << maxPrice << "\n";
-
-    return 0;
-}
-
-void OperationMain::printMarketStats() {
-
 }
 
 
 void OperationMain::printMenu() {
     cout << "\n=========================" << endl;
     cout << "1: Print help" << endl;
-    cout << "2: Print exchange states" << endl;
-    cout << "3: Place an ask" << endl;
-    cout << "4: Place a bid" << endl;
-    cout << "5: Print wallet" << endl;
-    cout << "6: Continue\n" << endl;
+    cout << "2: Print market statistics" << endl;
+    cout << "3: Print exchange states" << endl;
+    cout << "4: Place an ask" << endl;
+    cout << "5: Place a bid" << endl;
+    cout << "6: Print wallet" << endl;
+    cout << "7: Continue\n" << endl;
 }
 
 int OperationMain::getUserOption() {
@@ -121,18 +141,21 @@ void OperationMain::processUserOption(int userOption) {
             printHelp();
             break;
         case 2:
-            cout << "Exchange states: ???" << endl;
+            printMarketStats();
             break;
         case 3:
-            cout << "Ask what? ..." << endl;
+            cout << "Exchange states: ???" << endl;
             break;
         case 4:
-            cout << "$300 USD!!" << endl;
+            cout << "Ask what? ..." << endl;
             break;
         case 5:
-            walletStatus();
+            cout << "Beat it!" << endl;
             break;
         case 6:
+            walletStatus();
+            break;
+        case 7:
             cout << "To be continued..." << endl;
             break;
         default:
