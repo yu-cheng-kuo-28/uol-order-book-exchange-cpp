@@ -4,10 +4,10 @@
     - From [Object-Oriented Programming Specialization](https://www.coursera.org/specializations/object-oriented-programming-s12n) by UoL (University of London) on Coursera [including 5 courses]
         | #  | Course      | State   |
         |----|-------------|---------|
-        | 1  | Introduction to Object-Oriented Programming in C++        | Completed |
-        | 2  | C++ Programming: Classes and Data                         | Completed |
-        | 3  | Object-Oriented Programming in C++: Functions             | **Ongoing** |
-        | 4  | Working with Objects in C++                               |  |
+        | 1  | Introduction to Object-Oriented Programming in C++        | [Certificate](https://www.coursera.org/account/accomplishments/verify/WYH40T69ASU1) |
+        | 2  | C++ Programming: Classes and Data                         | [Certificate](https://www.coursera.org/account/accomplishments/verify/PFVA8Y2XLRE9) |
+        | 3  | Object-Oriented Programming in C++: Functions             | [Certificate](https://www.coursera.org/account/accomplishments/verify/64K5KPNTOF7M) |
+        | 4  | Working with Objects in C++                               | **Ongoing** |
         | 5  | Use C++ to build a Crypto Trading Platform: Final System  |  |
 
 
