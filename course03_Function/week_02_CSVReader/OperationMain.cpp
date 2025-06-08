@@ -7,6 +7,7 @@
 
 #include "OperationMain.h"
 #include "OrderBookEntry.h"
+#include "CSVReader.h"
 using namespace std;
 
 OperationMain::OperationMain() {
@@ -47,66 +48,37 @@ vector<string> tokenize(const string& csvLine, char sep) {
 }
 
 int OperationMain::loadOrderBook() {
-
-    ifstream file("order_book_origin.csv");
-    if (!file.is_open()) {
-        cerr << "Error: Could not open file!" << endl;
+    orders = CSVReader::readCSV("order_book_origin.csv");
+    if (orders.empty()) {
+        std::cerr << "Error: Could not load any orders from CSV!" << std::endl;
         return -1;
     }
-
-    string line;
-    vector<string> tokens; 
-
-    while (getline(file, line)) {
-
-        if (line.empty()) {
-            continue;
-        }
-
-        tokens = tokenize(line, ',');
-        if (tokens.size() != 5) {
-            cout << "Bad line!" << endl;
-            continue;
-        }
-
-        string timestamp, product, typeStr;
-        timestamp = tokens[0];
-        product = tokens[1];
-        typeStr = tokens[2];
-
-        double price, amount;
-
-        try {
-            price = stod(tokens[3]);
-            amount = stod(tokens[4]);
-        } catch (const exception& e) {
-            cout << "Bad float! " << tokens[3] << endl;
-            cout << "Bad float! " << tokens[4] << endl;
-            continue; // break;
-        }
-
-        OrderBookEntry obe(timestamp, product, typeStr, price, amount);
-        orders.push_back(obe);
-    }
-
-    file.close();
     return 0;
 }
 
+
 void OperationMain::printMarketStats() {
     
-    cout << "Order Book size: " << orders.size() << " entries" << endl;
-
     double sumPrice = 0.0;
     double minPrice = numeric_limits<double>::max();
     double maxPrice = numeric_limits<double>::lowest();
+    int bidCount = 0;
+    int askCount = 0;
 
     for (const auto &entry : orders) {
         double currentPrice = entry.getPrice();
         sumPrice += currentPrice;
         if (currentPrice < minPrice) minPrice = currentPrice;
         if (currentPrice > maxPrice) maxPrice = currentPrice;
+
+        OrderType type = entry.getType();
+        if (type == OrderType::bid) ++bidCount;
+        else if (type == OrderType::ask) ++askCount;
     }
+
+    cout << "Order Book size: " << orders.size() << " entries" << endl;
+    cout << " - Number of Bids: " << bidCount << "\n";
+    cout << " - Number of Asks: " << askCount << "\n";
 
     double avgPrice = (orders.empty() ? 0.0 : sumPrice / orders.size());
 
@@ -125,14 +97,24 @@ void OperationMain::printMenu() {
     cout << "4: Place an ask" << endl;
     cout << "5: Place a bid" << endl;
     cout << "6: Print wallet" << endl;
-    cout << "7: Continue\n" << endl;
+    cout << "q: Exit\n" << endl;
 }
 
 int OperationMain::getUserOption() {
-    int userOption;
-    cout << "Type in 1 - 6: ";
-    cin >> userOption;
-    return userOption;
+    std::string input;
+    cout << "Type in 1 - 6 or q: ";
+    cin >> input;
+
+    if (input == "q" || input == "Q") {
+        return 7;
+    }
+
+    try {
+        int option = std::stoi(input);
+        return option;
+    } catch (...) {
+        return -1;
+    }
 }
 
 void OperationMain::processUserOption(int userOption) {
@@ -157,7 +139,8 @@ void OperationMain::processUserOption(int userOption) {
             walletStatus();
             break;
         case 7:
-            cout << "To be continued..." << endl;
+            cout << "Exiting program..." << endl;
+            exit(0); // Quit the program
             break;
         default:
             cout << "Invalid choice! Please enter a number between 1 and 6." << endl;

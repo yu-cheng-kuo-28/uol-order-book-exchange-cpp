@@ -15,5 +15,6 @@
 
 The following GitHub repositories are referenced for learning and implementation guidance:
 
+- [Object-Oriented Programming Specialization](https://www.coursera.org/specializations/object-oriented-programming-s12n) by UoL (University of London) on Coursera 
 - [crypto-exchange-simulation](https://github.com/olich97/crypto-exchange-simulation)
 - [MerkleRex_CryptoTradingPlatform_Simulation](https://github.com/mohrsalt/MerkleRex_CryptoTradingPlatform_Simulation)
