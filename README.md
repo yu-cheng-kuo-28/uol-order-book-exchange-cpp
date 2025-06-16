@@ -7,7 +7,7 @@
         | 1  | Introduction to Object-Oriented Programming in C++        | [Certificate](https://www.coursera.org/account/accomplishments/verify/WYH40T69ASU1) |
         | 2  | C++ Programming: Classes and Data                         | [Certificate](https://www.coursera.org/account/accomplishments/verify/PFVA8Y2XLRE9) |
         | 3  | Object-Oriented Programming in C++: Functions             | [Certificate](https://www.coursera.org/account/accomplishments/verify/64K5KPNTOF7M) |
-        | 4  | Working with Objects in C++                               | **Ongoing** |
+        | 4  | Working with Objects in C++                               | [Certificate](https://www.coursera.org/account/accomplishments/verify/9Z493CYZP0WA) |
         | 5  | Use C++ to build a Crypto Trading Platform: Final System  |  |
 
 
